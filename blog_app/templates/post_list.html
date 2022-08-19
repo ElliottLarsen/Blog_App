@@ -1,0 +1,10 @@
+<!-- Post List -->
+{% if post_list %}
+<ul>
+    {% for post in post_list %}
+    <li><a href='/post/{{ post.id }}/'>{{  post.subject }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There is no post.</p>
+{% endif %}

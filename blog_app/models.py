@@ -22,6 +22,6 @@ class Reply(db.Model):
     """
     id = db.Column(db.Integer, primary_key = True)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete = "CASCADE"))
-    reply = db.relationship('Post', backref = db.backref('reply_set'))
+    post = db.relationship('Post', backref = db.backref('reply_set'))
     content = db.Column(db.Text(), nullable = False)
     create_date = db.Column(db.DateTime(), nullable = False)
