@@ -3,3 +3,15 @@
 <div>
     {{ post.content }}
 </div>
+<h5>You have {{ post.reply_set|length }} replies to this post.</h5>
+<div>
+    <ul>
+        {% for reply in post.reply_set %}
+        <li>{{ reply.content }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<form action="{{ url_for('reply.create', post_id=post.id) }}" method="post">
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="Reply">
+</form>
