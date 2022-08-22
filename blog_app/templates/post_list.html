@@ -1,5 +1,6 @@
 <!-- Post List -->
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+{% extends 'base.html' %}
+{% block content %}
 <div class="container my-3">
     <table class="table">
         <thead>
@@ -29,4 +30,6 @@
             {% endif %}
         </tbody>
     </table>
+    <a href="{{ url_for('post.create') }}" class='btn btn-primary'>Make a Post</a>
 </div>
+{% endblock %}

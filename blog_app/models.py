@@ -16,12 +16,12 @@ class Post(db.Model):
     content = db.Column(db.Text(), nullable = False)
     create_date = db.Column(db.DateTime(), nullable = False)
 
-class Reply(db.Model):
+class Comment(db.Model):
     """
-    Reply data model.
+    Comment data model.
     """
     id = db.Column(db.Integer, primary_key = True)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id', ondelete = "CASCADE"))
-    post = db.relationship('Post', backref = db.backref('reply_set'))
+    post = db.relationship('Post', backref = db.backref('comment_set'))
     content = db.Column(db.Text(), nullable = False)
     create_date = db.Column(db.DateTime(), nullable = False)
