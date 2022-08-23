@@ -5,7 +5,7 @@
 """
 Importing modules.
 """
-from flask import Blueprint, url_for
+from flask import Blueprint, url_for, render_template
 from werkzeug.utils import redirect
 from blog_app.models import Post
 
@@ -16,11 +16,13 @@ def main_page():
     """
     TODO
     """
-    return redirect(url_for('post.post_list'))
+    post_list = Post.query.order_by(Post.create_date.desc())
+    return render_template('post_list.html', post_list = post_list)
 
 @bp.route('/about')
 def about_page():
     """
     TODO
     """
-    return "About page."
+    return render_template('about_page.html')
+

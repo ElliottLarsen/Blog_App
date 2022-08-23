@@ -15,13 +15,6 @@ from blog_app.forms import PostForm
 
 bp = Blueprint('post', __name__, url_prefix = '/post')
 
-@bp.route('/list/')
-def post_list():
-    """
-    TODO
-    """
-    post_list = Post.query.order_by(Post.create_date.desc())
-    return render_template('post_list.html', post_list = post_list)
 
 @bp.route('/detail/<int:post_id>/')
 def detail(post_id):
