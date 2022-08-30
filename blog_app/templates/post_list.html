@@ -17,6 +17,9 @@
                 <td>{{ loop.index }}</td>
                 <td>
                     <a href="{{ url_for('post.detail', post_id=post.id) }}">{{ post.subject }}</a>
+                    {% if post.comment_set|length > 0 %}
+                    <span class="text-danger small mx-2">{{ post.comment_set|length }}</span>
+                    {% endif %}
                 </td>
                 <td>
                     {{ post.create_date }}

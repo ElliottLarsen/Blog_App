@@ -1,0 +1,33 @@
+<!--Signup Form-->
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">Sign Up</h5>
+    <form method="post">
+        {{ form.csrf_token }}
+        {% include "form_errors.html" %}
+        <div class="mb-3">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" id="username"
+                   value="{{ form.username.data or '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="password1">Password</label>
+            <input type="password" class="form-control" name="password_1" id="password_1"
+                   value="{{ form.password_1.data or '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="password2">Re-enter Password</label>
+            <input type="password" class="form-control" name="password_2" id="password_2"
+                   value="{{ form.password_2.data or '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" id="email"
+                   value="{{ form.email.data or '' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}
