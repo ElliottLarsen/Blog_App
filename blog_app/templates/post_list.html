@@ -4,23 +4,25 @@
 <div class="container my-3">
     <table class="table">
         <thead>
-            <tr class="table-dark">
+            <tr class="text-center table-dark">
                 <th>Post Number</th>
-                <th>Title</th>
+                <th style="width:50%">Title</th>
+                <th>Author</th>
                 <th>Date</th>
             </tr>
         </thead>
         <tbody>
             {% if post_list %}
             {% for post in post_list %}
-            <tr>
+            <tr class="text-center">
                 <td>{{ loop.index }}</td>
-                <td>
+                <td class="text-start">
                     <a href="{{ url_for('post.detail', post_id=post.id) }}">{{ post.subject }}</a>
                     {% if post.comment_set|length > 0 %}
                     <span class="text-danger small mx-2">{{ post.comment_set|length }}</span>
                     {% endif %}
                 </td>
+                <td>{{ post.user.username }}</td>
                 <td>
                     {{ post.create_date }}
                 </td>

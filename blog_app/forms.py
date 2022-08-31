@@ -27,3 +27,10 @@ class SignUpForm(FlaskForm):
     password_1 = PasswordField("Password", validators = [DataRequired(), EqualTo("password_2", "Passwords must match.")])
     password_2 = PasswordField("Re-enter password", validators = [DataRequired()])
     email = EmailField("Email", validators = [DataRequired(), Email()])
+
+class LoginForm(FlaskForm):
+    """
+    TODO
+    """
+    username = StringField('username', validators=[DataRequired(), Length(min=3, max=25)])
+    password = PasswordField('password', validators=[DataRequired()])

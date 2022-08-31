@@ -15,6 +15,9 @@ class Post(db.Model):
     subject = db.Column(db.String(200), nullable = False)
     content = db.Column(db.Text(), nullable = False)
     create_date = db.Column(db.DateTime(), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete = 'CASCADE'), nullable = False)
+    user = db.relationship('User', backref=db.backref('post_set'))
+    modify_date = db.Column(db.DateTime(), nullable=True)
 
 class Comment(db.Model):
     """
@@ -25,6 +28,9 @@ class Comment(db.Model):
     post = db.relationship('Post', backref = db.backref('comment_set'))
     content = db.Column(db.Text(), nullable = False)
     create_date = db.Column(db.DateTime(), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete = 'CASCADE'), nullable = False)
+    user = db.relationship('User', backref=db.backref('answer_set'))
+    modify_date = db.Column(db.DateTime(), nullable=True)
 
 class User(db.Model):
     """
