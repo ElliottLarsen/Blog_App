@@ -39,14 +39,17 @@ def signup():
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(username = form.username.data).first()
         if not user:
-            user = User(username = form.username.data,
-                        password = generate_password_hash(form.password_1.data),
-                        email = form.email.data)
-            db.session.add(user)
-            db.session.commit()
-            return redirect(url_for('main.main_page'))
+            try:
+                user = User(username = form.username.data,
+                            password = generate_password_hash(form.password_1.data),
+                            email = form.email.data)
+                db.session.add(user)
+                db.session.commit()
+                return render_template('signup_success.html', name = user.username)
+            except:
+                flash('Username and/or Email has already been taken.')
         else:
-            flash('The user already exists.')
+            flash('Username and/or Email has already been taken.')
     return render_template('signup.html', form=form)
 
 @bp.route('/login/', methods=('GET', 'POST'))
