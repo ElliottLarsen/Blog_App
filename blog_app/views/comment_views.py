@@ -1,6 +1,6 @@
 # Author: Elliott Larsen
-# Date:
-# Description: 
+# Date: 11/29/2022
+# Description: Views with /create route.
 
 """
 Importing Modules.
@@ -19,7 +19,7 @@ bp = Blueprint('comment', __name__, url_prefix = '/comment')
 @login_required
 def create(post_id):
     """
-    TODO
+    Create a comment to a post.
     """
     form = CommentForm()
     post = Post.query.get_or_404(post_id)
@@ -29,13 +29,13 @@ def create(post_id):
         post.comment_set.append(comment)
         db.session.commit()
         return redirect(url_for('post.detail', post_id = post_id))
-    return render_template('post_detail.html', post = post, form = form)
+    return render_template('post_detail.j2', post = post, form = form)
 
 @bp.route('/edit/<int:comment_id>', methods=('GET', 'POST'))
 @login_required
 def edit(comment_id):
     """
-    TODO
+    Edit a post.
     """
     comment = Comment.query.get_or_404(comment_id)
     if g.user != comment.user:
@@ -50,13 +50,13 @@ def edit(comment_id):
             return redirect(url_for('post.detail', post_id = comment.post.id))
     else:
         form = CommentForm(obj=comment)
-    return render_template('comment_form.html', form=form)
+    return render_template('comment_form.j2', form=form)
 
 @bp.route('/delete/<int:comment_id>')
 @login_required
 def delete(comment_id):
     """
-    TODO
+    Delete a post.
     """
     comment = Comment.query.get_or_404(comment_id)
     post_id = comment.post.id

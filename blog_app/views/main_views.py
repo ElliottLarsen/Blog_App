@@ -1,6 +1,6 @@
 # Author: Elliott Larsen
-# Date:
-# Description: 
+# Date: 11/29/2022
+# Description: Main views.
 
 """
 Importing modules.
@@ -14,15 +14,15 @@ bp = Blueprint('main', __name__, url_prefix = '/')
 @bp.route('/')
 def main_page():
     """
-    TODO
+    Main view with the list of posts.
     """
     post_list = Post.query.order_by(Post.create_date.desc())
-    return render_template('post_list.html', post_list = post_list)
+    return render_template('post_list.j2', post_list = post_list)
 
 @bp.route('/about')
 def about_page():
     """
-    TODO
+    About page.
     """
-    return render_template('about_page.html')
+    return render_template('about_page.j2')
 

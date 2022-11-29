@@ -1,6 +1,6 @@
 # Author: Elliott Larsen
-# Date:
-# Description: 
+# Date: 11/29/2022
+# Description: Views with /post route.
 
 """
 Importing modules.
@@ -20,28 +20,31 @@ bp = Blueprint('post', __name__, url_prefix = '/post')
 @bp.route('/detail/<int:post_id>/')
 def detail(post_id):
     """
-    TODO
+    Display the post.
     """
     form = CommentForm()
     post = Post.query.get_or_404(post_id)
-    return render_template('post_detail.html', post = post, form = form)
+    return render_template('post_detail.j2', post = post, form = form)
 
 @bp.route('/create/', methods=('GET', 'POST'))
 @login_required
 def create():
+    """
+    Create a new post.
+    """
     form = PostForm()
     if request.method == 'POST' and form.validate_on_submit():
         post = Post(subject = form.subject.data, content = form.content.data, create_date = datetime.now(), user = g.user)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('main.main_page'))
-    return render_template('post_form.html', form = form)
+    return render_template('post_form.j2', form = form)
 
 @bp.route('/edit/<int:post_id>', methods=('GET', 'POST'))
 @login_required
 def edit(post_id):
     """
-    TODO
+    Edit a post.
     """
     post = Post.query.get_or_404(post_id)
     if g.user != post.user:
@@ -57,11 +60,14 @@ def edit(post_id):
     else:  
         form = PostForm(obj = post)
 
-    return render_template('post_form.html', form=form)
+    return render_template('post_form.j2', form=form)
 
 @bp.route('/delete/<int:post_id>')
 @login_required
 def delete(post_id):
+    """
+    Delete a post.
+    """
     post = Post.query.get_or_404(post_id)
     if g.user != post.user:
         flash('You do not have access to delete.')

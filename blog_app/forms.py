@@ -1,6 +1,6 @@
 # Author: Elliott Larsen
-# Date:
-# Description: 
+# Date: 11/29/2022
+# Description: Models for various forms.
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, EmailField
@@ -8,20 +8,20 @@ from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 class PostForm(FlaskForm):
     """
-    TODO
+    Post form model.
     """
     subject = StringField("Title", validators = [DataRequired()])
     content = TextAreaField("Content", validators = [DataRequired()])
 
 class CommentForm(FlaskForm):
     """
-    TODO
+    Comment form model.
     """
     content = TextAreaField('Content', validators=[DataRequired("This field is required.")])
 
 class SignUpForm(FlaskForm):
     """
-    TODO
+    Signup form model.
     """
     username = StringField("Username", validators = [DataRequired(), Length(min = 3, max = 25)])
     password_1 = PasswordField("Password", validators = [DataRequired(), EqualTo("password_2", "Passwords must match.")])
@@ -30,7 +30,7 @@ class SignUpForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     """
-    TODO
+    Login form model.
     """
     username = StringField('username', validators=[DataRequired(), Length(min=3, max=25)])
     password = PasswordField('password', validators=[DataRequired()])

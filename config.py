@@ -1,6 +1,6 @@
 # Author: Elliott Larsen
-# Date:
-# Description: 
+# Date: 11/29/2022
+# Description: Configuration for the application
 
 import os
 

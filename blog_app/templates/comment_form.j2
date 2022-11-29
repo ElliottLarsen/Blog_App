@@ -1,12 +1,12 @@
-<!--Edit Comment-->
+{# Edit Comment #}
 
-{% extends 'base.html' %}
+{% extends 'base.j2' %}
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">Edit Comment</h5>
     <form method="post">
         {{ form.csrf_token }}
-        {% include "form_errors.html" %}
+        {% include "form_errors.j2" %}
         <div class="mb-3">
             <label for="content">Comment</label>
             <textarea class="form-control" name="content" id="content"
